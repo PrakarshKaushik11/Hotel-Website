@@ -1,0 +1,22 @@
+/* src/App.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: black; /* ✅ matches loader */
+  color: #222;
+}
+
+
+.section {
+  min-height: 100vh;
+  padding: 100px 60px;
+  background: #f5f5f5;
+}
+
+.hero-section {
+  background-image: url('./assets/hero-bg-1.avif');
+  color: white;
+  text-align: center;
+  padding-top: 200px;
+}
+

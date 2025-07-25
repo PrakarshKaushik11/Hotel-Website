@@ -1,0 +1,97 @@
+.about-section {
+  padding: 100px 20px;
+  background-color: #000; 
+  color: white;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-text {
+  flex: 1 1 400px;
+}
+
+.about-text h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #e74c3c;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.about-image {
+  flex: 1 1 400px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+/* Base hidden state for animation */
+.about-section .about-heading,
+.about-section .about-paragraph,
+.about-section .about-image {
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+/* Text slides up */
+.about-section .about-heading,
+.about-section .about-paragraph {
+  transform: translateY(20px);
+}
+
+/* Image zoom + fade */
+.about-section .about-image {
+  transform: scale(0.95);
+}
+
+/* When section becomes visible */
+
+.about-section.visible .about-heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+.about-section.visible .about-paragraph {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+.about-section.visible .about-image {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.4s;
+}
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+  }
+
+  .about-text h2 {
+    font-size: 2rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+}
