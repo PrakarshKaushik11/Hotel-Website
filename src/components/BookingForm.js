@@ -6,11 +6,12 @@ const BookingForm = () => {
   const queryParams = new URLSearchParams(window.location.search);
   const prefilledRoomType = queryParams.get('roomType') || '';
 
-  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '', // ✅ New field
     checkIn: '',
     checkOut: '',
     guests: '',
@@ -24,7 +25,6 @@ const BookingForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    // Clear checkOut if it's before the new checkIn
     if (name === 'checkIn' && formData.checkOut && value > formData.checkOut) {
       setFormData((prev) => ({
         ...prev,
@@ -39,7 +39,7 @@ const BookingForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.acceptPolicy) {
@@ -52,54 +52,80 @@ const BookingForm = () => {
       return;
     }
 
-    console.log('Booking Data:', formData);
-    setFormSubmitted(true);
-    setShowToast(true);
+    try {
+      const response = await fetch("https://formspree.io/f/xkgzrrgk", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone, // ✅ Added here
+          checkIn: formData.checkIn,
+          checkOut: formData.checkOut,
+          guests: formData.guests,
+          roomType: formData.roomType,
+          acceptPolicy: formData.acceptPolicy ? "Accepted" : "Not Accepted",
+        }),
+      });
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      checkIn: '',
-      checkOut: '',
-      guests: '',
-      roomType: prefilledRoomType,
-      acceptPolicy: false,
-    });
-
-    setTimeout(() => setShowToast(false), 3000);
+      if (response.ok) {
+        console.log('Form successfully submitted!');
+        setFormSubmitted(true);
+        setShowToast(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          checkIn: '',
+          checkOut: '',
+          guests: '',
+          roomType: prefilledRoomType,
+          acceptPolicy: false,
+        });
+        setTimeout(() => setShowToast(false), 3000);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("There was an error. Please try again.");
+    }
   };
 
   return (
     <div className="booking-form-container">
       <h2>Book Your Stay</h2>
       {showToast && <div className="toast-message">Booking submitted successfully!</div>}
-      <form onSubmit={handleSubmit} className="booking-form" action="https://formspree.io/f/xkgzrrgk" method="POST">
+
+      <form onSubmit={handleSubmit} className="booking-form">
         <input type="text" name="name" placeholder="Your Name" value={formData.name} required onChange={handleChange} />
         <input type="email" name="email" placeholder="Your Email" value={formData.email} required onChange={handleChange} />
+        <input type="tel" name="phone" placeholder="Your Contact Number" value={formData.phone} required onChange={handleChange} /> {/* ✅ Added */}
 
         <label htmlFor="checkIn" className="date-label">Booking From (Check-In Date)</label>
-<input
-  type="date"
-  id="checkIn"
-  name="checkIn"
-  value={formData.checkIn}
-  required
-  onChange={handleChange}
-  min={today}
-/>
+        <input
+          type="date"
+          id="checkIn"
+          name="checkIn"
+          value={formData.checkIn}
+          required
+          onChange={handleChange}
+          min={today}
+        />
 
-<label htmlFor="checkOut" className="date-label">Till (Check-Out Date)</label>
-<input
-  type="date"
-  id="checkOut"
-  name="checkOut"
-  value={formData.checkOut}
-  required
-  onChange={handleChange}
-  min={formData.checkIn || today}
-/>
-
+        <label htmlFor="checkOut" className="date-label">Till (Check-Out Date)</label>
+        <input
+          type="date"
+          id="checkOut"
+          name="checkOut"
+          value={formData.checkOut}
+          required
+          onChange={handleChange}
+          min={formData.checkIn || today}
+        />
 
         <input type="number" name="guests" placeholder="No. of Guests" value={formData.guests} required onChange={handleChange} min="1" />
         <input type="text" name="roomType" placeholder="Room Type" value={formData.roomType} required onChange={handleChange} />
@@ -109,7 +135,7 @@ const BookingForm = () => {
           <label>I accept the <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></label>
         </div>
 
-        <button type="submit" >Submit Booking</button>
+        <button type="submit">Submit Booking</button>
       </form>
 
       {formSubmitted && (
