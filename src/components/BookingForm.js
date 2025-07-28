@@ -128,7 +128,9 @@ const BookingForm = () => {
         />
 
         <input type="number" name="guests" placeholder="No. of Guests" value={formData.guests} required onChange={handleChange} min="1" />
-        <input type="text" name="roomType" placeholder="Room Type" value={formData.roomType} required onChange={handleChange} />
+        <input type="text" name="roomType" value={formData.roomType} readOnly className="locked-input"
+/>
+
 
         <div className="policy-checkbox">
           <input type="checkbox" name="acceptPolicy" checked={formData.acceptPolicy} onChange={handleChange} />
