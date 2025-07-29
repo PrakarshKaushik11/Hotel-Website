@@ -1,6 +1,6 @@
 .hero {
-  height: 100vh; /* Full viewport height */
-  background-image: url('./assets/hotel-bg.avif'); /* or import path if local */
+  height: 100vh; 
+  background-image: url('./assets/hotel-bg.avif'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -19,7 +19,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* dark overlay */
+  background: rgba(0, 0, 0, 0.5); 
 }
 
 .hero::before {
@@ -28,7 +28,7 @@
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.45); /* adjust as needed */
+  background: rgba(0, 0, 0, 0.45); 
   z-index: 1;
 }
 

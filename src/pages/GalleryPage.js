@@ -1,6 +1,6 @@
 // src/pages/GalleryPage.js
 import React from 'react';
-import GallerySection from '../components/GallerySection'; // ✅ default import
+import GallerySection from '../components/GallerySection'; 
 
 const GalleryPage = () => {
   return (

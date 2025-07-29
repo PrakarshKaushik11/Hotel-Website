@@ -1,6 +1,6 @@
 import React from 'react';
 import './Loader.css';
-import loadingGif from '../assets/loading.gif'; // Replace with your actual gif
+import loadingGif from '../assets/loading.gif'; 
 
 const Loader = () => {
   return (

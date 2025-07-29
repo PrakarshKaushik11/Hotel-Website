@@ -7,7 +7,7 @@ const AboutUs = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-  const section = sectionRef.current; // ✅ capture the current ref value
+  const section = sectionRef.current; 
 
   const observer = new IntersectionObserver(
     ([entry]) => {
@@ -19,7 +19,7 @@ const AboutUs = () => {
   if (section) observer.observe(section);
 
   return () => {
-    if (section) observer.unobserve(section); // ✅ use the captured value
+    if (section) observer.unobserve(section); 
   };
 }, []);
 

@@ -11,7 +11,7 @@ const BookingForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '', // ✅ New field
+    phone: '', 
     checkIn: '',
     checkOut: '',
     guests: '',
@@ -62,7 +62,7 @@ const BookingForm = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          phone: formData.phone, // ✅ Added here
+          phone: formData.phone, 
           checkIn: formData.checkIn,
           checkOut: formData.checkOut,
           guests: formData.guests,

@@ -41,7 +41,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
-/* Base hidden state for animation */
+
 .about-section .about-heading,
 .about-section .about-paragraph,
 .about-section .about-image {
@@ -49,18 +49,15 @@
   transition: all 0.6s ease;
 }
 
-/* Text slides up */
 .about-section .about-heading,
 .about-section .about-paragraph {
   transform: translateY(20px);
 }
 
-/* Image zoom + fade */
 .about-section .about-image {
   transform: scale(0.95);
 }
 
-/* When section becomes visible */
 
 .about-section.visible .about-heading {
   opacity: 1;

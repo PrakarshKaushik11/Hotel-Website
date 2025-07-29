@@ -17,7 +17,6 @@
   margin: 0 auto;
 }
 
-/* Dark overlay */
 .hero-container::before {
   content: '';
   position: absolute;
@@ -26,7 +25,6 @@
   z-index: 1;
 }
 
-/* Text animation */
 .hero-container h1 {
   font-size: 3.5rem;
   font-weight: bold;
